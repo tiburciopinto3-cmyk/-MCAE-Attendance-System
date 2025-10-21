@@ -1,0 +1,1074 @@
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>MCAE Attendance System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen flex flex-col md:flex-row">
+    <!-- Sidebar Navigation -->
+    <nav
+      class="bg-blue-700 border-r border-blue-800 w-full md:w-64 flex-shrink-0 md:flex flex-col fixed bottom-0 md:bottom-auto md:top-0 md:h-screen z-20"
+      id="sidebar"
+    >
+      <div
+        class="flex items-center justify-between h-16 border-b border-blue-800 px-4"
+      >
+        <div class="flex items-center space-x-3">
+          <img
+            alt="Blue company logo with company abbreviation text"
+            class="h-10 w-10"
+            height="40"
+            src="https://storage.googleapis.com/a1aa/image/7ca4f2f4-10a3-4f2d-d14a-f17b85362daf.jpg"
+            width="40"
+          />
+          <span class="text-xl font-semibold text-white"> Absensia Mcae </span>
+        </div>
+        <div
+          id="welcome-message"
+          class="text-white font-medium text-sm hidden md:block"
+        >
+          Welcome
+        </div>
+      </div>
+      <ul
+        class="flex md:flex-col justify-around md:justify-start md:space-y-2 text-white text-sm md:text-base"
+        id="nav-links"
+      ></ul>
+    </nav>
+    <!-- Main Content -->
+    <main
+      class="flex-1 pt-16 md:pt-0 md:ml-0 md:pl-64 min-h-screen bg-gray-50"
+      id="main-content"
+    >
+      <!-- Login Page -->
+      <section
+        class="max-w-md mx-auto mt-12 p-6 bg-white rounded-lg shadow-md"
+        id="login-page"
+      >
+        <h1 class="text-2xl font-semibold text-center mb-6">
+          MCAE Attendance Login
+        </h1>
+        <form class="space-y-6" id="login-form">
+          <div>
+            <label
+              class="block mb-2 text-sm font-medium text-gray-700"
+              for="role"
+            >
+              Login As
+            </label>
+            <select
+              class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              id="role"
+              name="role"
+              required=""
+            >
+              <option disabled="" selected="" value="">Select role</option>
+              <option value="karyawan">Employee</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div>
+            <label
+              class="block mb-2 text-sm font-medium text-gray-700"
+              for="username"
+            >
+              Username
+            </label>
+            <input
+              class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              id="username"
+              name="username"
+              placeholder="Enter username"
+              required=""
+              type="text"
+            />
+          </div>
+          <div>
+            <label
+              class="block mb-2 text-sm font-medium text-gray-700"
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              id="password"
+              name="password"
+              placeholder="Enter password"
+              required=""
+              type="password"
+            />
+          </div>
+          <button
+            class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+      </section>
+      <!-- Employee Dashboard -->
+      <section
+        class="hidden max-w-5xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md"
+        id="karyawan-dashboard"
+      >
+        <h2 class="text-2xl font-semibold mb-6 text-center text-blue-700">
+          Employee Dashboard
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-md mx-auto">
+            <button
+              class="flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white py-3 rounded-md shadow-md transition"
+              id="btn-checkin"
+            >
+              <i class="fas fa-sign-in-alt"></i>
+              <span>Check In</span>
+            </button>
+            <button
+              class="flex items-center justify-center space-x-2 bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-md shadow-md transition"
+              id="btn-break"
+            >
+              <i class="fas fa-coffee"></i>
+              <span>Break</span>
+            </button>
+            <button
+              class="flex items-center justify-center space-x-2 bg-yellow-700 hover:bg-yellow-800 text-white py-3 rounded-md shadow-md transition"
+              id="btn-after-break"
+            >
+              <i class="fas fa-play"></i>
+              <span>After Break</span>
+            </button>
+            <button
+              class="flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white py-3 rounded-md shadow-md transition"
+              id="btn-checkout"
+            >
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Check Out</span>
+            </button>
+          </div>
+          <div>
+            <h3
+              class="text-lg font-semibold mb-3 text-blue-700 text-center md:text-left"
+            >
+              Leave Request
+            </h3>
+            <form
+              class="space-y-4 bg-gray-50 p-4 rounded-md border border-gray-300 max-w-md mx-auto md:mx-0"
+              id="izin-form"
+            >
+              <div>
+                <label
+                  class="block mb-1 font-medium text-gray-700"
+                  for="nama-izin"
+                >
+                  Employee Name
+                </label>
+                <input
+                  class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  id="nama-izin"
+                  name="nama-izin"
+                  placeholder="Enter employee name"
+                  required=""
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block mb-1 font-medium text-gray-700"
+                  for="tanggal-izin"
+                >
+                  Leave Date
+                </label>
+                <input
+                  class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  id="tanggal-izin"
+                  name="tanggal-izin"
+                  required=""
+                  type="date"
+                />
+              </div>
+              <div>
+                <label
+                  class="block mb-1 font-medium text-gray-700"
+                  for="alasan-izin"
+                >
+                  Reason
+                </label>
+                <textarea
+                  class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  id="alasan-izin"
+                  name="alasan-izin"
+                  placeholder="Explain the reason"
+                  required=""
+                  rows="3"
+                ></textarea>
+              </div>
+              <button
+                class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+                type="submit"
+              >
+                Submit Leave Request
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="mt-8 max-w-4xl mx-auto">
+          <h3 class="text-lg font-semibold mb-3 text-center text-blue-700">
+            Attendance History
+          </h3>
+          <div
+            class="overflow-auto max-h-64 border border-gray-300 rounded-md p-3 bg-gray-50"
+            id="attendance-history"
+          >
+            <p class="text-center text-gray-500">No attendance data yet.</p>
+          </div>
+        </div>
+      </section>
+      <!-- Admin Dashboard -->
+      <section
+        class="hidden max-w-6xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md"
+        id="admin-dashboard"
+      >
+        <h2 class="text-2xl font-semibold mb-6 text-center text-blue-700">
+          Admin Dashboard
+        </h2>
+        <div
+          class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 max-w-6xl mx-auto"
+        >
+          <div
+            class="bg-green-100 rounded-lg p-4 flex flex-col items-center justify-center shadow"
+          >
+            <div class="text-green-700 text-4xl font-bold" id="total-karyawan">
+              0
+            </div>
+            <div class="text-green-700 font-semibold mt-2">Total Employees</div>
+          </div>
+          <div
+            class="bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center shadow"
+          >
+            <div class="text-blue-700 text-4xl font-bold" id="karyawan-hadir">
+              0
+            </div>
+            <div class="text-blue-700 font-semibold mt-2">
+              Employees Present
+            </div>
+          </div>
+          <div
+            class="bg-yellow-100 rounded-lg p-4 flex flex-col items-center justify-center shadow"
+          >
+            <div class="text-yellow-700 text-4xl font-bold" id="karyawan-izin">
+              0
+            </div>
+            <div class="text-yellow-700 font-semibold mt-2">
+              Employees on Leave
+            </div>
+          </div>
+          <div
+            class="bg-red-100 rounded-lg p-4 flex flex-col items-center justify-center shadow"
+          >
+            <div
+              class="text-red-700 text-4xl font-bold"
+              id="karyawan-terlambat"
+            >
+              0
+            </div>
+            <div class="text-red-700 font-semibold mt-2">Employees Late</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-blue-700">
+            Submitted Leave Requests
+          </h3>
+          <div
+            class="overflow-auto max-h-96 border border-gray-300 rounded-md p-4 bg-gray-50"
+            id="izin-list"
+          >
+            <p class="text-center text-gray-500">
+              No leave requests submitted.
+            </p>
+          </div>
+        </div>
+        <div class="mt-6 max-w-6xl mx-auto border-t border-gray-300 pt-6">
+          <h3 class="text-lg font-semibold mb-3 text-blue-700">
+            Upload Monthly File (PDF, DOC, DOCX, XLS, XLSX)
+          </h3>
+          <form
+            id="upload-form"
+            class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4"
+          >
+            <input
+              accept=".pdf,.doc,.docx,.xls,.xlsx"
+              class="border border-gray-300 rounded-md p-2 w-full md:w-auto"
+              id="file-upload"
+              name="file-upload"
+              type="file"
+              required=""
+            />
+            <button
+              class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+              type="submit"
+            >
+              Upload
+            </button>
+          </form>
+          <div class="mt-4 text-gray-700" id="upload-status"></div>
+        </div>
+        <div class="mt-10 max-w-6xl mx-auto">
+          <h3 class="text-lg font-semibold mb-3 text-blue-700">
+            Monthly Employee Data
+          </h3>
+          <div
+            class="overflow-auto max-h-96 border border-gray-300 rounded-md p-4 bg-gray-50"
+          >
+            <table
+              class="w-full text-left text-sm border-collapse"
+              id="monthly-employee-table"
+            >
+              <thead>
+                <tr class="bg-blue-100">
+                  <th class="border px-2 py-1">NIK</th>
+                  <th class="border px-2 py-1">Name</th>
+                  <th class="border px-2 py-1">Present</th>
+                  <th class="border px-2 py-1">On Leave</th>
+                  <th class="border px-2 py-1">Late</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border px-2 py-1 text-center" colspan="5">
+                    No data available.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button
+            id="download-csv"
+            class="mt-4 bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition"
+          >
+            Download Employee Data CSV
+          </button>
+        </div>
+      </section>
+    </main>
+    <script>
+      // Simple in-memory "database"
+      const users = [
+        {
+          username: "admin",
+          password: "admin123",
+          role: "admin",
+          nik: "1001",
+          nama: "Admin",
+        },
+        {
+          username: "andi",
+          password: "andi123",
+          role: "karyawan",
+          nik: "2001",
+          nama: "Andi",
+        },
+        {
+          username: "budi",
+          password: "budi123",
+          role: "karyawan",
+          nik: "2002",
+          nama: "Budi",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+        {
+          username: "citra",
+          password: "citra123",
+          role: "karyawan",
+          nik: "2003",
+          nama: "Citra",
+        },
+      ];
+
+      let currentUser = null;
+
+      // Attendance data keyed by username
+      const attendanceData = {
+        andi: [],
+        budi: [],
+        citra: [],
+      };
+
+      // Izin requests array
+      const izinRequests = [];
+
+      // DOM Elements
+      const loginPage = document.getElementById("login-page");
+      const karyawanDashboard = document.getElementById("karyawan-dashboard");
+      const adminDashboard = document.getElementById("admin-dashboard");
+      const navLinks = document.getElementById("nav-links");
+      const mainContent = document.getElementById("main-content");
+      const welcomeMessage = document.getElementById("welcome-message");
+
+      // Login form
+      const loginForm = document.getElementById("login-form");
+
+      // Attendance buttons
+      const btnCheckin = document.getElementById("btn-checkin");
+      const btnBreak = document.getElementById("btn-break");
+      const btnAfterBreak = document.getElementById("btn-after-break");
+      const btnCheckout = document.getElementById("btn-checkout");
+
+      // Attendance history container
+      const attendanceHistory = document.getElementById("attendance-history");
+
+      // Izin form and list
+      const izinForm = document.getElementById("izin-form");
+      const izinList = document.getElementById("izin-list");
+
+      // Admin dashboard stats elements
+      const totalKaryawanEl = document.getElementById("total-karyawan");
+      const karyawanHadirEl = document.getElementById("karyawan-hadir");
+      const karyawanIzinEl = document.getElementById("karyawan-izin");
+      const karyawanTerlambatEl = document.getElementById("karyawan-terlambat");
+
+      // Upload form and status
+      const uploadForm = document.getElementById("upload-form");
+      const fileUploadInput = document.getElementById("file-upload");
+      const uploadStatus = document.getElementById("upload-status");
+
+      // Monthly employee table body
+      const monthlyEmployeeTableBody = document.querySelector(
+        "#monthly-employee-table tbody"
+      );
+
+      // Download CSV button
+      const downloadCsvBtn = document.getElementById("download-csv");
+
+      // Utility: format date and time
+      function formatDateTime(date) {
+        return date.toLocaleString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+      }
+
+      // Utility: format date only
+      function formatDate(date) {
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
+      }
+
+      // Render navigation links based on role
+      function renderNav(role) {
+        navLinks.innerHTML = "";
+        if (role === "karyawan") {
+          navLinks.innerHTML = `
+          <li>
+            <button id="nav-dashboard" class="w-full text-left px-4 py-3 hover:bg-blue-600 rounded-md flex items-center space-x-2 text-white font-semibold">
+              <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
+            </button>
+          </li>
+          <li>
+            <button id="nav-logout" class="w-full text-left px-4 py-3 hover:bg-red-600 rounded-md flex items-center space-x-2 text-red-400 font-semibold">
+              <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </button>
+          </li>
+        `;
+        } else if (role === "admin") {
+          navLinks.innerHTML = `
+          <li>
+            <button id="nav-dashboard" class="w-full text-left px-4 py-3 hover:bg-blue-600 rounded-md flex items-center space-x-2 text-white font-semibold">
+              <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
+            </button>
+          </li>
+          <li>
+            <button id="nav-logout" class="w-full text-left px-4 py-3 hover:bg-red-600 rounded-md flex items-center space-x-2 text-red-400 font-semibold">
+              <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </button>
+          </li>
+        `;
+        }
+        // Attach nav event listeners
+        const navDashboard = document.getElementById("nav-dashboard");
+        const navLogout = document.getElementById("nav-logout");
+
+        navDashboard?.addEventListener("click", () => {
+          if (currentUser.role === "karyawan") {
+            showKaryawanDashboard();
+          } else if (currentUser.role === "admin") {
+            showAdminDashboard();
+          }
+        });
+
+        navLogout?.addEventListener("click", () => {
+          logout();
+        });
+      }
+
+      // Show login page
+      function showLogin() {
+        loginPage.classList.remove("hidden");
+        karyawanDashboard.classList.add("hidden");
+        adminDashboard.classList.add("hidden");
+        navLinks.innerHTML = "";
+        currentUser = null;
+        uploadStatus.textContent = "";
+        fileUploadInput.value = "";
+        monthlyEmployeeTableBody.innerHTML =
+          '<tr><td class="border px-2 py-1 text-center" colspan="5">No data available.</td></tr>';
+        welcomeMessage.classList.add("hidden");
+        welcomeMessage.textContent = "";
+      }
+
+      // Show employee dashboard
+      function showKaryawanDashboard() {
+        loginPage.classList.add("hidden");
+        karyawanDashboard.classList.remove("hidden");
+        adminDashboard.classList.add("hidden");
+        renderNav("karyawan");
+        renderAttendanceHistory();
+        welcomeMessage.classList.remove("hidden");
+        welcomeMessage.textContent = `Welcome, ${currentUser.nama}`;
+      }
+
+      // Show admin dashboard
+      function showAdminDashboard() {
+        loginPage.classList.add("hidden");
+        karyawanDashboard.classList.add("hidden");
+        adminDashboard.classList.remove("hidden");
+        renderNav("admin");
+        renderIzinList();
+        renderAdminStats();
+        renderMonthlyEmployeeTable();
+        uploadStatus.textContent = "";
+        fileUploadInput.value = "";
+        welcomeMessage.classList.remove("hidden");
+        welcomeMessage.textContent = `Welcome, ${currentUser.nama}`;
+      }
+
+      // Logout function
+      function logout() {
+        currentUser = null;
+        showLogin();
+      }
+
+      // Render attendance history for current user
+      function renderAttendanceHistory() {
+        if (!currentUser || currentUser.role !== "karyawan") return;
+        const records = attendanceData[currentUser.username] || [];
+        if (records.length === 0) {
+          attendanceHistory.innerHTML =
+            '<p class="text-center text-gray-500">No attendance data yet.</p>';
+          return;
+        }
+        let html = `<table class="w-full text-left text-sm border-collapse">
+        <thead>
+          <tr class="bg-blue-100">
+            <th class="border px-2 py-1">Date</th>
+            <th class="border px-2 py-1">Status</th>
+            <th class="border px-2 py-1">Time</th>
+          </tr>
+        </thead>
+        <tbody>`;
+        records.forEach((rec) => {
+          html += `<tr class="even:bg-gray-100">
+          <td class="border px-2 py-1">${formatDate(rec.date)}</td>
+          <td class="border px-2 py-1 capitalize">${rec.status}</td>
+          <td class="border px-2 py-1">${rec.time}</td>
+        </tr>`;
+        });
+        html += "</tbody></table>";
+        attendanceHistory.innerHTML = html;
+      }
+
+      // Add attendance record for current user with late logic
+      function addAttendance(status) {
+        if (!currentUser || currentUser.role !== "karyawan") return;
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+
+        let finalStatus = status;
+
+        if (status === "check-in") {
+          // Check if check-in after 08:30:00
+          if (
+            now.getHours() > 8 ||
+            (now.getHours() === 8 && now.getMinutes() > 30)
+          ) {
+            finalStatus = "check-in late";
+          }
+        } else if (status === "after-break") {
+          // Check if after-break after 14:00:00 (2 PM)
+          if (now.getHours() > 14) {
+            finalStatus = "after-break late";
+          }
+        }
+
+        if (!attendanceData[currentUser.username]) {
+          attendanceData[currentUser.username] = [];
+        }
+        attendanceData[currentUser.username].push({
+          date: now,
+          status: finalStatus,
+          time: timeStr,
+        });
+        renderAttendanceHistory();
+        alert(`Successfully performed ${finalStatus.replace("-", " ")}`);
+      }
+
+      // Render leave requests for admin
+      function renderIzinList() {
+        if (!currentUser || currentUser.role !== "admin") return;
+        if (izinRequests.length === 0) {
+          izinList.innerHTML =
+            '<p class="text-center text-gray-500">No leave requests submitted.</p>';
+          return;
+        }
+        let html = `<table class="w-full text-left text-sm border-collapse">
+        <thead>
+          <tr class="bg-blue-100">
+            <th class="border px-2 py-1">Employee Name</th>
+            <th class="border px-2 py-1">Leave Date</th>
+            <th class="border px-2 py-1">Reason</th>
+          </tr>
+        </thead>
+        <tbody>`;
+        izinRequests.forEach((izin) => {
+          html += `<tr class="even:bg-gray-100">
+          <td class="border px-2 py-1">${izin.nama}</td>
+          <td class="border px-2 py-1">${formatDate(
+            new Date(izin.tanggal)
+          )}</td>
+          <td class="border px-2 py-1 whitespace-pre-wrap">${izin.alasan}</td>
+        </tr>`;
+        });
+        html += "</tbody></table>";
+        izinList.innerHTML = html;
+      }
+
+      // Render admin dashboard stats with late logic
+      function renderAdminStats() {
+        const totalEmployees = users.filter(
+          (u) => u.role === "karyawan"
+        ).length;
+        totalKaryawanEl.textContent = totalEmployees;
+
+        const today = new Date();
+        const todayStr = today.toISOString().slice(0, 10);
+
+        let presentCount = 0;
+        let leaveCount = 0;
+        let lateCount = 0;
+
+        const leaveTodaySet = new Set();
+        izinRequests.forEach((izin) => {
+          if (izin.tanggal === todayStr) {
+            leaveTodaySet.add(izin.nama.toLowerCase());
+          }
+        });
+
+        users.forEach((user) => {
+          if (user.role !== "karyawan") return;
+          const username = user.username.toLowerCase();
+
+          if (leaveTodaySet.has(username)) {
+            leaveCount++;
+            return;
+          }
+
+          const records = attendanceData[username] || [];
+          const checkinRecords = records.filter((r) => {
+            const rDateStr = r.date.toISOString().slice(0, 10);
+            return (
+              rDateStr === todayStr &&
+              (r.status === "check-in" || r.status === "check-in late")
+            );
+          });
+
+          if (checkinRecords.length > 0) {
+            presentCount++;
+          }
+
+          const lateRecords = records.filter((r) => {
+            const rDateStr = r.date.toISOString().slice(0, 10);
+            return (
+              rDateStr === todayStr &&
+              (r.status === "check-in late" || r.status === "after-break late")
+            );
+          });
+
+          if (lateRecords.length > 0) {
+            lateCount++;
+          }
+        });
+
+        karyawanHadirEl.textContent = presentCount;
+        karyawanIzinEl.textContent = leaveCount;
+        karyawanTerlambatEl.textContent = lateCount;
+      }
+
+      // Render monthly employee table with late logic
+      function renderMonthlyEmployeeTable() {
+        if (!currentUser || currentUser.role !== "admin") return;
+        if (users.filter((u) => u.role === "karyawan").length === 0) {
+          monthlyEmployeeTableBody.innerHTML =
+            '<tr><td class="border px-2 py-1 text-center" colspan="5">No data available.</td></tr>';
+          return;
+        }
+        const today = new Date();
+        const todayStr = today.toISOString().slice(0, 10);
+
+        const leaveTodaySet = new Set();
+        izinRequests.forEach((izin) => {
+          if (izin.tanggal === todayStr) {
+            leaveTodaySet.add(izin.nama.toLowerCase());
+          }
+        });
+
+        let rows = "";
+        users.forEach((user) => {
+          if (user.role !== "karyawan") return;
+          const username = user.username.toLowerCase();
+
+          const records = attendanceData[username] || [];
+          const checkinRecords = records.filter((r) => {
+            const rDateStr = r.date.toISOString().slice(0, 10);
+            return (
+              rDateStr === todayStr &&
+              (r.status === "check-in" || r.status === "check-in late")
+            );
+          });
+          const hadir = checkinRecords.length > 0 ? "Yes" : "No";
+
+          const izin = leaveTodaySet.has(username) ? "Yes" : "No";
+
+          const lateRecords = records.filter((r) => {
+            const rDateStr = r.date.toISOString().slice(0, 10);
+            return (
+              rDateStr === todayStr &&
+              (r.status === "check-in late" || r.status === "after-break late")
+            );
+          });
+          const terlambat = lateRecords.length > 0 ? "Yes" : "No";
+
+          rows += `<tr class="even:bg-gray-100">
+          <td class="border px-2 py-1">${user.nik}</td>
+          <td class="border px-2 py-1">${user.nama}</td>
+          <td class="border px-2 py-1 text-center">${hadir}</td>
+          <td class="border px-2 py-1 text-center">${izin}</td>
+          <td class="border px-2 py-1 text-center">${terlambat}</td>
+        </tr>`;
+        });
+
+        monthlyEmployeeTableBody.innerHTML =
+          rows ||
+          '<tr><td class="border px-2 py-1 text-center" colspan="5">No data available.</td></tr>';
+      }
+
+      // Convert data to CSV string
+      function convertDataToCSV() {
+        const headers = ["NIK", "Name", "Present", "On Leave", "Late"];
+        const rows = [];
+
+        const today = new Date();
+        const todayStr = today.toISOString().slice(0, 10);
+
+        const leaveTodaySet = new Set();
+        izinRequests.forEach((izin) => {
+          if (izin.tanggal === todayStr) {
+            leaveTodaySet.add(izin.nama.toLowerCase());
+          }
+        });
+
+        users.forEach((user) => {
+          if (user.role !== "karyawan") return;
+          const username = user.username.toLowerCase();
+
+          const records = attendanceData[username] || [];
+          const checkinRecords = records.filter((r) => {
+            const rDateStr = r.date.toISOString().slice(0, 10);
+            return (
+              rDateStr === todayStr &&
+              (r.status === "check-in" || r.status === "check-in late")
+            );
+          });
+          const hadir = checkinRecords.length > 0 ? "Yes" : "No";
+
+          const izin = leaveTodaySet.has(username) ? "Yes" : "No";
+
+          const lateRecords = records.filter((r) => {
+            const rDateStr = r.date.toISOString().slice(0, 10);
+            return (
+              rDateStr === todayStr &&
+              (r.status === "check-in late" || r.status === "after-break late")
+            );
+          });
+          const terlambat = lateRecords.length > 0 ? "Yes" : "No";
+
+          rows.push([user.nik, user.nama, hadir, izin, terlambat]);
+        });
+
+        let csvContent = headers.join(",") + "\n";
+        rows.forEach((row) => {
+          csvContent += row.map((field) => `"${field}"`).join(",") + "\n";
+        });
+        return csvContent;
+      }
+
+      // Download CSV file
+      function downloadCSV() {
+        const csv = convertDataToCSV();
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `employee_data_${new Date()
+          .toISOString()
+          .slice(0, 10)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      // Event listener for download button
+      downloadCsvBtn.addEventListener("click", () => {
+        if (!currentUser || currentUser.role !== "admin") {
+          alert("You must be logged in as admin to download data.");
+          return;
+        }
+        downloadCSV();
+      });
+
+      // Handle login form submit
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const role = loginForm.role.value;
+        const username = loginForm.username.value.trim();
+        const password = loginForm.password.value;
+
+        const user = users.find(
+          (u) =>
+            u.username === username &&
+            u.password === password &&
+            u.role === role
+        );
+        if (!user) {
+          alert("Incorrect username, password, or role.");
+          return;
+        }
+        currentUser = user;
+        if (role === "karyawan") {
+          showKaryawanDashboard();
+        } else if (role === "admin") {
+          showAdminDashboard();
+        }
+        loginForm.reset();
+      });
+
+      // Attendance buttons events
+      btnCheckin.addEventListener("click", () => addAttendance("check-in"));
+      btnBreak.addEventListener("click", () => addAttendance("break"));
+      btnAfterBreak.addEventListener("click", () =>
+        addAttendance("after-break")
+      );
+      btnCheckout.addEventListener("click", () => addAttendance("check-out"));
+
+      // Handle leave request form submit
+      izinForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!currentUser || currentUser.role !== "karyawan") return;
+
+        const nama = izinForm["nama-izin"].value.trim();
+        const tanggal = izinForm["tanggal-izin"].value;
+        const alasan = izinForm["alasan-izin"].value.trim();
+
+        if (!nama || !tanggal || !alasan) {
+          alert("All fields are required.");
+          return;
+        }
+
+        izinRequests.push({ nama, tanggal, alasan });
+        alert("Leave request submitted successfully.");
+        izinForm.reset();
+        if (currentUser.role === "admin") {
+          renderIzinList();
+          renderAdminStats();
+          renderMonthlyEmployeeTable();
+        }
+      });
+
+      // Handle upload form submit
+      uploadForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!currentUser || currentUser.role !== "admin") {
+          uploadStatus.textContent =
+            "You must be logged in as admin to upload files.";
+          uploadStatus.className = "text-red-600 mt-2";
+          return;
+        }
+        const file = fileUploadInput.files[0];
+        if (!file) {
+          uploadStatus.textContent = "Please select a file first.";
+          uploadStatus.className = "text-red-600 mt-2";
+          return;
+        }
+        const allowedTypes = [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.ms-excel",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        ];
+        if (!allowedTypes.includes(file.type)) {
+          uploadStatus.textContent =
+            "Unsupported file format. Use PDF, DOC, DOCX, XLS, or XLSX.";
+          uploadStatus.className = "text-red-600 mt-2";
+          return;
+        }
+        uploadStatus.textContent = "Uploading file...";
+        uploadStatus.className = "text-gray-700 mt-2";
+        setTimeout(() => {
+          uploadStatus.textContent = `File "${file.name}" uploaded successfully.`;
+          uploadStatus.className = "text-green-600 mt-2";
+          fileUploadInput.value = "";
+        }, 1500);
+      });
+
+      // Initialize app
+      showLogin();
+    </script>
+  </body>
+</html>
